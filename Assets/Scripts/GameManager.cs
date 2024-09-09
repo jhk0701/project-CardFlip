@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     public Camera mainCamera;
     public Text timeTxt;
-    public Animator RedBackground;
+    public GameObject RedBackground;
 
     float time = 0.0f;
 
@@ -34,18 +34,13 @@ public class GameManager : MonoBehaviour
 
         if (time >= 20f && time < 30f)
         {
-            if (!RedBackground.GetBool("Blinking"))
-            {
-                RedBackground.SetBool("Blinking", true);
-            }
+            RedBackground.SetActive(true);
         }
 
         else if (time >= 30f)
         {
-            if (RedBackground.GetBool("Blinking"))
-            {
-                RedBackground.SetBool("Blinking", false);
-            }
+           RedBackground.SetActive(false);
+         
             Time.timeScale = 0f;
         }
     }
