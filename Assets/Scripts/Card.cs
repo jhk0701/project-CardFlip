@@ -4,57 +4,29 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    private bool _hasTransform = false;
+    public GameObject front;
+    public GameObject back;
 
-    private Transform _transform;
+    public Animator anim;
 
-    private Transform getTransform {
-        get
-        {
-            if(_hasTransform == false)
-            {
-                _hasTransform = true;
-                _transform = transform;
-            }
-            return _transform;
-        }
-    }
 
-    public int index {
-        get;
-        private set;
-    }
 
-    public void Set(int index, Vector2 position, Sprite sprite)
+
+    void Start()
     {
-        this.index = index;
-        getTransform.position = position;
-        //frontImage.sprite = sprite; 
+        
+    }
+
+    
+    void Update()
+    {
+        
     }
 
     public void OpenCard()
     {
-    }
-
-    public void DestroyCard()
-    {
-        Invoke("DestroyCardInvoke", 0.5f);
-    }
-
-    void DestroyCardInvoke()
-    {
-        Destroy(gameObject);
-    }
-
-    public void CloseCard()
-    {
-        Invoke("CloseCardInvoke", 0.5f);
-    }
-
-    void CloseCardInvoke()
-    {
-        //animator.SetBool("isOpen", false);
-        //front.SetActive(false);
-        //back.SetActive(true);
+        anim.SetBool("isOpen", true);
+        front.SetActive(true);
+        back.SetActive(false);
     }
 }
