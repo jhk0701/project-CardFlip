@@ -29,7 +29,7 @@ public class Card : MonoBehaviour
     {
         this.index = index;
         getTransform.position = position;
-        //frontImage.sprite = sprite;
+        //frontImage.sprite = sprite; 
     }
 
     public void OpenCard()
