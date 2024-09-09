@@ -356,7 +356,6 @@ MonoBehaviour:
   mainCamera: {fileID: 1979615160}
   timeTxt: {fileID: 1991321837}
   RedBackground: {fileID: 3855804503562464603, guid: 9daed4a918dc26445890fee54e066e73, type: 3}
-  time: 0
 --- !u!4 &1760985892
 Transform:
   m_ObjectHideFlags: 0
