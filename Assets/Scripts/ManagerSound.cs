@@ -25,20 +25,16 @@ public class ManagerSound : MonoBehaviour
     [SerializeField] AudioClip _clipMatchSuccess;
     [SerializeField] AudioClip _clipMatchFail;
 
-    void Awake()
+    public void Awake()
     {
         if(instance){
             Destroy(gameObject);
             return;
         }
-
+        instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
-    {
-        StartBgm(TypeBgm.Main);
-    }
 
     public void StartBgm(TypeBgm bgm){
         _audioSrcMain.Stop();
