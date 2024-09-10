@@ -484,7 +484,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 919460940}
         m_TargetAssemblyTypeName: ManagerEnding, Assembly-CSharp
-        m_MethodName: SetPage
+        m_MethodName: GoTo
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -835,7 +835,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 919460940}
         m_TargetAssemblyTypeName: ManagerEnding, Assembly-CSharp
-        m_MethodName: SetPage
+        m_MethodName: GoTo
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1920,7 +1920,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 919460940}
         m_TargetAssemblyTypeName: ManagerEnding, Assembly-CSharp
-        m_MethodName: SetPage
+        m_MethodName: GoTo
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2268,7 +2268,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 919460940}
         m_TargetAssemblyTypeName: ManagerEnding, Assembly-CSharp
-        m_MethodName: SetPage
+        m_MethodName: GoTo
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

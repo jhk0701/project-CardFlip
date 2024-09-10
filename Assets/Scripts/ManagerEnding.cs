@@ -49,7 +49,11 @@ public class ManagerEnding : MonoBehaviour
         page--;
     }
 
-    public void SetPage(int id){
+    public void GoTo(int num){
+        page = num;
+    }
+
+    void SetPage(int id){
         //  button setting
         _btnPrev.interactable = !id.Equals(0);
         _btnNext.interactable = !id.Equals(listTmi.Count - 1);
