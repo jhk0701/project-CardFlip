@@ -33,8 +33,7 @@ public class Board : MonoBehaviour
             Card card = Instantiate(cardPrefab, transform);
             float x = (i % 4) * 1.4f - 2.1f;
             float y = (i / 4) * 1.4f - 3.0f;
-            switch(arr[i])
-            {
+            switch(arr[i]) {
                 case 0:
                     //card.Set(0, new Vector2(x, y), junghwan1, CanOpenCard);
                     card.Set(0, new Vector2(x, y), junghwan1);

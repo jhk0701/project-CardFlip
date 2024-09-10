@@ -102,12 +102,18 @@ public class GameManager : MonoBehaviour
     }
 
     public void GameOver(bool isWin){
-        Debug.Log($"Player is win ? {isWin}");
+        if(isWin)
+        {
+            SceneManager.LoadScene(2);
+            ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Main);
+            return;
+        }
+
         RedBackground.SetActive(false);
         _isPlaying = false;
 
         _pnlGameOver.SetActive(true);
-        _txtGameResult.text = isWin ? "축하합니다!\n팀원들의 사진" : "실패했어요...";
+        _txtGameResult.text = isWin ? "축하합니다!\n" : "실패했어요...";
     }
 
     public void Retry(){
