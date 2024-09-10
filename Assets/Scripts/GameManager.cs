@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
 
     float time = 0.0f;
 
+    public Card selectedCard;
+
     private void Awake()
     {
         if (Instance == null)
@@ -44,4 +46,32 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0f;
         }
     }
+
+    public void SelectCard(Card c){
+        
+        if(selectedCard == null)
+        {
+            selectedCard = c;
+            ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Touch);
+        }
+        else{
+            if(c.index.Equals(selectedCard.index)){
+                // match
+                selectedCard.DestroyCard();
+                c.DestroyCard();
+
+                ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Success);
+            }
+            else{
+                // not match
+                selectedCard.CloseCard();
+                c.CloseCard();
+
+                ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Fail);
+            }
+
+            selectedCard = null;
+        }
+    }
+
 }
