@@ -34,6 +34,11 @@ public class Card : MonoBehaviour
 
     //private Func<Card, bool> function = null;
 
+    void Start()
+    {
+        anim.Play("CardIdle", -1, UnityEngine.Random.Range(0f, 1f));
+    }
+
     public void Set(int index, Vector2 position, Sprite sprite/*, Func<Card, bool> function*/)
     {
         this.index = index;
@@ -51,7 +56,6 @@ public class Card : MonoBehaviour
         back.SetActive(false);
 
         GameManager.instance.SelectCard(this);
-        CloseCard();
     }
 
     public void DestroyCard()
@@ -66,6 +70,9 @@ public class Card : MonoBehaviour
 
     public void CloseCard(float delay = 3f)
     {
+        if(IsInvoking("CloseCardInvoke"))
+            CancelInvoke("CloseCardInvoke");
+
         Invoke("CloseCardInvoke", delay);
     }
 
