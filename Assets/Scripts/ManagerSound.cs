@@ -7,13 +7,13 @@ public class ManagerSound : MonoBehaviour
      public static ManagerSound instance;
 
     [SerializeField] AudioSource _audioSrcMain;
-    [SerializeField] AudioSource _audioSrcEffect;
+    [SerializeField] List<AudioSource> _audioSrcEffects;
 
     public enum TypeBgm {
         Main, Emergence
     }
-    public enum TypeSfx {
-        Touch, Success, Fail
+    public enum TypeSfx : int {
+        Touch = 0, Success = 1, Fail = 2
     }
 
     [Header("BGM")]
@@ -21,9 +21,7 @@ public class ManagerSound : MonoBehaviour
     [SerializeField] AudioClip _clipEmergencyBgm;
 
     [Header("Effect")]
-    [SerializeField] AudioClip _clipTouch;
-    [SerializeField] AudioClip _clipMatchSuccess;
-    [SerializeField] AudioClip _clipMatchFail;
+    [SerializeField] List<AudioClip> _clips;
 
     public void Awake()
     {
@@ -55,21 +53,11 @@ public class ManagerSound : MonoBehaviour
 
     public void StartSfx(TypeSfx sfx){
 
-        _audioSrcEffect.Stop();
+        _audioSrcEffects[(int)sfx].Stop();
         
-        switch(sfx){
-            case TypeSfx.Touch :
-            _audioSrcEffect.clip = _clipTouch;
-            break;
-            case TypeSfx.Success :
-            _audioSrcEffect.clip = _clipMatchSuccess;
-            break;
-            case TypeSfx.Fail :
-            _audioSrcEffect.clip = _clipMatchFail;
-            break;
-        }
+        _audioSrcEffects[(int)sfx].clip = _clips[(int)sfx];
 
-        _audioSrcEffect.Play();
+        _audioSrcEffects[(int)sfx].Play();
     }
 
     [ContextMenu("Test")]

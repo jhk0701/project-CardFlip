@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,11 +32,21 @@ public class Card : MonoBehaviour
         private set;
     }
 
-    public void Set(int index, Vector2 position, Sprite sprite)
+    //private Func<Card, bool> function = null;
+
+    void Start()
+    {
+        anim.Play("CardIdle", -1, UnityEngine.Random.Range(0f, 1f));
+    }
+
+    public void Set(int index, Vector2 position, Sprite sprite/*, Func<Card, bool> function*/)
     {
         this.index = index;
         getTransform.position = position;
-        //frontImage.sprite = sprite; 
+        SpriteRenderer spriteRenderer = front.GetComponent<SpriteRenderer>();
+        
+        if(spriteRenderer != null)
+            spriteRenderer.sprite = sprite;
     }
 
     public void OpenCard()
@@ -43,6 +54,8 @@ public class Card : MonoBehaviour
         anim.SetBool("isOpen", true);
         front.SetActive(true);
         back.SetActive(false);
+
+        GameManager.instance.SelectCard(this);
     }
 
     public void DestroyCard()
@@ -55,16 +68,19 @@ public class Card : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void CloseCard()
+    public void CloseCard(float delay = 3f)
     {
-        Invoke("CloseCardInvoke", 0.5f);
+        if(IsInvoking("CloseCardInvoke"))
+            CancelInvoke("CloseCardInvoke");
+
+        Invoke("CloseCardInvoke", delay);
     }
 
     void CloseCardInvoke()
     {
-        //animator.SetBool("isOpen", false);
-        //front.SetActive(false);
-        //back.SetActive(true);
+        anim.SetBool("isOpen", false);
+        front.SetActive(false);
+        back.SetActive(true);
     }
 
 }

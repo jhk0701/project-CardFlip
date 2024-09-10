@@ -33,33 +33,69 @@ public class Board : MonoBehaviour
             Card card = Instantiate(cardPrefab, transform);
             float x = (i % 4) * 1.4f - 2.1f;
             float y = (i / 4) * 1.4f - 3.0f;
-            switch(arr[i])
-            {
+            switch(arr[i]) {
                 case 0:
+                    //card.Set(0, new Vector2(x, y), junghwan1, CanOpenCard);
                     card.Set(0, new Vector2(x, y), junghwan1);
                     break;
                 case 1:
-                    card.Set(0, new Vector2(x, y), junghwan2);
+                    //card.Set(1, new Vector2(x, y), junghwan2, CanOpenCard);
+                    card.Set(1, new Vector2(x, y), junghwan2);
                     break;
                 case 2:
-                    card.Set(0, new Vector2(x, y), younghan1);
+                    //card.Set(2, new Vector2(x, y), younghan1, CanOpenCard);
+                    card.Set(2, new Vector2(x, y), younghan1);
                     break;
                 case 3:
-                    card.Set(0, new Vector2(x, y), younghan2);
+                    //card.Set(3, new Vector2(x, y), younghan2, CanOpenCard);
+                    card.Set(3, new Vector2(x, y), younghan2);
                     break;
                 case 4:
-                    card.Set(0, new Vector2(x, y), chamsol1);
+                    //card.Set(4, new Vector2(x, y), chamsol1, CanOpenCard);
+                    card.Set(4, new Vector2(x, y), chamsol1);
                     break;
                 case 5:
-                    card.Set(0, new Vector2(x, y), chamsol2);
+                    //card.Set(5, new Vector2(x, y), chamsol2, CanOpenCard);
+                    card.Set(5, new Vector2(x, y), chamsol2);
                     break;
                 case 6:
-                    card.Set(0, new Vector2(x, y), jiyoon1);
+                    //card.Set(6, new Vector2(x, y), jiyoon1, CanOpenCard);
+                    card.Set(6, new Vector2(x, y), jiyoon1);
                     break;
                 case 7:
-                    card.Set(0, new Vector2(x, y), jiyoon2);
+                    //card.Set(7, new Vector2(x, y), jiyoon2, CanOpenCard);
+                    card.Set(7, new Vector2(x, y), jiyoon2);
                     break;
             }
         }
     }
+
+    // private Card compareCard = null;
+    // private bool CanOpenCard(Card card)
+    // {
+    //     if(GameManager.instance.time < 30)
+    //     {
+    //         if(compareCard == null)
+    //         {
+    //             compareCard = card;
+    //             return true;
+    //         }
+    //         else if(compareCard != card)
+    //         {
+    //             if(compareCard.index == card.index)
+    //             {
+    //                 compareCard.DestroyCard();
+    //                 card.DestroyCard();
+    //             }
+    //             else
+    //             {
+    //                 compareCard.CloseCard();
+    //                 card.CloseCard();
+    //             }
+    //             compareCard = null;
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
 }
