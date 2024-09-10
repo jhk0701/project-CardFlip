@@ -484,7 +484,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 919460940}
         m_TargetAssemblyTypeName: ManagerEnding, Assembly-CSharp
-        m_MethodName: SetPage
+        m_MethodName: GoTo
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -835,7 +835,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 919460940}
         m_TargetAssemblyTypeName: ManagerEnding, Assembly-CSharp
-        m_MethodName: SetPage
+        m_MethodName: GoTo
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1149,9 +1149,9 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 354f1ba6c7b1b1b45a220beaef89a5fc, type: 3}
     - {fileID: 21300000, guid: 6e9ae4040a691104a8d32997c86f334f, type: 3}
   - name: "\uBC15\uCC38\uC194"
-    mbti: 
-    hobby: 
-    favoriteGame: 
+    mbti: INFP
+    hobby: "\uB3C5\uC11C\uC640 \uB7EC\uB2DD"
+    favoriteGame: "Anno1800, \uBB38\uBA85, \uD06C\uB8E8\uC138\uC774\uB354 \uD0B9\uC988"
     pic:
     - {fileID: 21300000, guid: 8dffee570a48e3e40ad66fe1a27aa33f, type: 3}
     - {fileID: 21300000, guid: e111d0cac7d7d5845828b2e3e692891d, type: 3}
@@ -1920,7 +1920,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 919460940}
         m_TargetAssemblyTypeName: ManagerEnding, Assembly-CSharp
-        m_MethodName: SetPage
+        m_MethodName: GoTo
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2268,7 +2268,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 919460940}
         m_TargetAssemblyTypeName: ManagerEnding, Assembly-CSharp
-        m_MethodName: SetPage
+        m_MethodName: GoTo
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
