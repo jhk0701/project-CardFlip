@@ -39,25 +39,25 @@ public class Board : MonoBehaviour
                     card.Set(0, new Vector2(x, y), junghwan1);
                     break;
                 case 1:
-                    card.Set(0, new Vector2(x, y), junghwan2);
+                    card.Set(1, new Vector2(x, y), junghwan2);
                     break;
                 case 2:
-                    card.Set(0, new Vector2(x, y), younghan1);
+                    card.Set(2, new Vector2(x, y), younghan1);
                     break;
                 case 3:
-                    card.Set(0, new Vector2(x, y), younghan2);
+                    card.Set(3, new Vector2(x, y), younghan2);
                     break;
                 case 4:
-                    card.Set(0, new Vector2(x, y), chamsol1);
+                    card.Set(4, new Vector2(x, y), chamsol1);
                     break;
                 case 5:
-                    card.Set(0, new Vector2(x, y), chamsol2);
+                    card.Set(5, new Vector2(x, y), chamsol2);
                     break;
                 case 6:
-                    card.Set(0, new Vector2(x, y), jiyoon1);
+                    card.Set(6, new Vector2(x, y), jiyoon1);
                     break;
                 case 7:
-                    card.Set(0, new Vector2(x, y), jiyoon2);
+                    card.Set(7, new Vector2(x, y), jiyoon2);
                     break;
             }
         }
