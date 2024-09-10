@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
         if (_time <= 10f && !RedBackground.activeInHierarchy)
         {
             RedBackground.SetActive(true);
+            ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Emergence);
         }
         else if (_time <= 0f)
         {
@@ -111,5 +112,6 @@ public class GameManager : MonoBehaviour
 
     public void Retry(){
         SceneManager.LoadScene(1);
+        ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Main);
     }
 }
