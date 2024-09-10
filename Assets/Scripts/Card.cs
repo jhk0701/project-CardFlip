@@ -53,6 +53,8 @@ public class Card : MonoBehaviour
             anim.SetBool("isOpen", true);
             front.SetActive(true);
             back.SetActive(false);
+
+            GameManager.Instance.SelectCard(this);
         }
     }
 

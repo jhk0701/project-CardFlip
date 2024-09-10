@@ -41,25 +41,25 @@ public class Board : MonoBehaviour
                     card.Set(0, new Vector2(x, y), junghwan1, CanOpenCard);
                     break;
                 case 1:
-                    card.Set(0, new Vector2(x, y), junghwan2, CanOpenCard);
+                    card.Set(1, new Vector2(x, y), junghwan2, CanOpenCard);
                     break;
                 case 2:
-                    card.Set(0, new Vector2(x, y), younghan1, CanOpenCard);
+                    card.Set(2, new Vector2(x, y), younghan1, CanOpenCard);
                     break;
                 case 3:
-                    card.Set(0, new Vector2(x, y), younghan2, CanOpenCard);
+                    card.Set(3, new Vector2(x, y), younghan2, CanOpenCard);
                     break;
                 case 4:
-                    card.Set(0, new Vector2(x, y), chamsol1, CanOpenCard);
+                    card.Set(4, new Vector2(x, y), chamsol1, CanOpenCard);
                     break;
                 case 5:
-                    card.Set(0, new Vector2(x, y), chamsol2, CanOpenCard);
+                    card.Set(5, new Vector2(x, y), chamsol2, CanOpenCard);
                     break;
                 case 6:
-                    card.Set(0, new Vector2(x, y), jiyoon1, CanOpenCard);
+                    card.Set(6, new Vector2(x, y), jiyoon1, CanOpenCard);
                     break;
                 case 7:
-                    card.Set(0, new Vector2(x, y), jiyoon2, CanOpenCard);
+                    card.Set(7, new Vector2(x, y), jiyoon2, CanOpenCard);
                     break;
             }
         }
