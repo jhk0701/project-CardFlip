@@ -24,6 +24,8 @@ public class Board : MonoBehaviour
     [SerializeField]
     private Sprite jiyoon2;
 
+    private Card compareCard = null;
+
     void Start()
     {
         int[] arr = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
@@ -36,30 +38,58 @@ public class Board : MonoBehaviour
             switch(arr[i])
             {
                 case 0:
-                    card.Set(0, new Vector2(x, y), junghwan1);
+                    card.Set(0, new Vector2(x, y), junghwan1, CanOpenCard);
                     break;
                 case 1:
-                    card.Set(0, new Vector2(x, y), junghwan2);
+                    card.Set(0, new Vector2(x, y), junghwan2, CanOpenCard);
                     break;
                 case 2:
-                    card.Set(0, new Vector2(x, y), younghan1);
+                    card.Set(0, new Vector2(x, y), younghan1, CanOpenCard);
                     break;
                 case 3:
-                    card.Set(0, new Vector2(x, y), younghan2);
+                    card.Set(0, new Vector2(x, y), younghan2, CanOpenCard);
                     break;
                 case 4:
-                    card.Set(0, new Vector2(x, y), chamsol1);
+                    card.Set(0, new Vector2(x, y), chamsol1, CanOpenCard);
                     break;
                 case 5:
-                    card.Set(0, new Vector2(x, y), chamsol2);
+                    card.Set(0, new Vector2(x, y), chamsol2, CanOpenCard);
                     break;
                 case 6:
-                    card.Set(0, new Vector2(x, y), jiyoon1);
+                    card.Set(0, new Vector2(x, y), jiyoon1, CanOpenCard);
                     break;
                 case 7:
-                    card.Set(0, new Vector2(x, y), jiyoon2);
+                    card.Set(0, new Vector2(x, y), jiyoon2, CanOpenCard);
                     break;
             }
         }
+    }
+
+    private bool CanOpenCard(Card card)
+    {
+        if(GameManager.Instance.time < 30)
+        {
+            if(compareCard == null)
+            {
+                compareCard = card;
+                return true;
+            }
+            else if(compareCard != card)
+            {
+                if(compareCard.index == card.index)
+                {
+                    compareCard.DestroyCard();
+                    card.DestroyCard();
+                }
+                else
+                {
+                    compareCard.CloseCard();
+                    card.CloseCard();
+                }
+                compareCard = null;
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -44,12 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9801aefefd1658d449b1ddc3595e3498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 0}
-  junghwan1: {fileID: 21300000, guid: 4a6d7d91b05a589489fcf23351e78ac7, type: 3}
-  junghwan2: {fileID: 21300000, guid: 9d116a1e306708a4a8ecb1457c52e1f3, type: 3}
-  younghan1: {fileID: 21300000, guid: 734b256603351f34a98e4c4a318aeb03, type: 3}
-  younghan2: {fileID: 21300000, guid: d6b0edb88347d684c9e288e5067e7a7b, type: 3}
-  chamsol1: {fileID: 21300000, guid: 9e47958c773e08245b22b72c1a953897, type: 3}
-  chamsol2: {fileID: 21300000, guid: 193f95094101e6148b98bbe405caa273, type: 3}
-  jiyoon1: {fileID: 21300000, guid: 4a73526ea4899824fa184d53bc37cb92, type: 3}
-  jiyoon2: {fileID: 21300000, guid: c6b57d6dff746a34082a05a3c6df344a, type: 3}
+  cardPrefab: {fileID: -7095461325423991630, guid: e9a18ba2d1e0f924c88c05eebaadfa5a, type: 3}
+  junghwan1: {fileID: 21300000, guid: 354f1ba6c7b1b1b45a220beaef89a5fc, type: 3}
+  junghwan2: {fileID: 21300000, guid: ca191ec1f12cdaf4bb03fdb5f1194c2c, type: 3}
+  younghan1: {fileID: 21300000, guid: 4e650c2c25ea6d34baa88f124025b537, type: 3}
+  younghan2: {fileID: 21300000, guid: bef17711c51e1804d9970bc26d686f3d, type: 3}
+  chamsol1: {fileID: 21300000, guid: 8dffee570a48e3e40ad66fe1a27aa33f, type: 3}
+  chamsol2: {fileID: 21300000, guid: e111d0cac7d7d5845828b2e3e692891d, type: 3}
+  jiyoon1: {fileID: 21300000, guid: cf02f1c3223cbd944b076e9165a682e3, type: 3}
+  jiyoon2: {fileID: 21300000, guid: 6e9ae4040a691104a8d32997c86f334f, type: 3}

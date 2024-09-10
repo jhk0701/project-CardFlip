@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,18 +32,28 @@ public class Card : MonoBehaviour
         private set;
     }
 
-    public void Set(int index, Vector2 position, Sprite sprite)
+    private Func<Card, bool> function = null;
+
+    public void Set(int index, Vector2 position, Sprite sprite, Func<Card, bool> function)
     {
         this.index = index;
         getTransform.position = position;
-        //frontImage.sprite = sprite; 
+        SpriteRenderer spriteRenderer = front.GetComponent<SpriteRenderer>();
+        if(spriteRenderer != null)
+        {
+            spriteRenderer.sprite = sprite;
+        }
+        this.function = function;
     }
 
     public void OpenCard()
     {
-        anim.SetBool("isOpen", true);
-        front.SetActive(true);
-        back.SetActive(false);
+        if (function != null && function.Invoke(this) == true)
+        {
+            anim.SetBool("isOpen", true);
+            front.SetActive(true);
+            back.SetActive(false);
+        }
     }
 
     public void DestroyCard()
