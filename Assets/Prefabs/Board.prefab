@@ -45,11 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: -7095461325423991630, guid: e9a18ba2d1e0f924c88c05eebaadfa5a, type: 3}
-  junghwan1: {fileID: 21300000, guid: 354f1ba6c7b1b1b45a220beaef89a5fc, type: 3}
+  junghwan1: {fileID: 21300000, guid: 237a69b0a7da9f9448e962583771c550, type: 3}
   junghwan2: {fileID: 21300000, guid: ca191ec1f12cdaf4bb03fdb5f1194c2c, type: 3}
   younghan1: {fileID: 21300000, guid: 4e650c2c25ea6d34baa88f124025b537, type: 3}
-  younghan2: {fileID: 21300000, guid: 237a69b0a7da9f9448e962583771c550, type: 3}
+  younghan2: {fileID: 21300000, guid: cf02f1c3223cbd944b076e9165a682e3, type: 3}
   chamsol1: {fileID: 21300000, guid: 8dffee570a48e3e40ad66fe1a27aa33f, type: 3}
   chamsol2: {fileID: 21300000, guid: e111d0cac7d7d5845828b2e3e692891d, type: 3}
-  jiyoon1: {fileID: 21300000, guid: cf02f1c3223cbd944b076e9165a682e3, type: 3}
+  jiyoon1: {fileID: 21300000, guid: 354f1ba6c7b1b1b45a220beaef89a5fc, type: 3}
   jiyoon2: {fileID: 21300000, guid: 6e9ae4040a691104a8d32997c86f334f, type: 3}
