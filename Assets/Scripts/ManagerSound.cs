@@ -31,6 +31,7 @@ public class ManagerSound : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        
         instance = this;
         DontDestroyOnLoad(gameObject);
     }
