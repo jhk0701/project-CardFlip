@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     [Header("Card")]
     public int _cardCount = 16;
     public Card selectedCard;
+    public Card lockedCard; // last card
 
     [Header("Panel")]
     [SerializeField] GameObject _pnlGameOver;
@@ -77,6 +78,9 @@ public class GameManager : MonoBehaviour
         if(_cardCount.Equals(0)){
             // win
             GameOver(true);
+        }
+        else if(_cardCount.Equals(2)){
+            lockedCard?.ReleaseLock();
         }
     }
 

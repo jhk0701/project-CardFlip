@@ -24,29 +24,24 @@ public class ManagerSound : MonoBehaviour
     [Header("Effect")]
     [SerializeField] List<AudioClip> _clips;
 
-    [Header("Volume")]
-    [Range(0f, 1f)]
-    [SerializeField] float _volumeBgm;
     float pVolumeBgm{
-        get { return _volumeBgm; }
+        get { return ManagerGlobal.instance.playerData.volumeBgm; }
         set {
-            _volumeBgm = value;
-            _audioSrcMain.volume = _volumeBgm;
-            _txtBgm.text = (_volumeBgm * 100f).ToString("N0");
+            ManagerGlobal.instance.playerData.volumeBgm = value;
+            _audioSrcMain.volume = value;
+            _txtBgm.text = (value * 100f).ToString("N0");
         }
     }
     
-    [Range(0f, 1f)]
-    [SerializeField] float _volumeSfx;
     float pVolumeSfx{
-        get { return _volumeSfx; }
+        get { return ManagerGlobal.instance.playerData.volumeSfx; }
         set {
-            _volumeSfx = value;
+            ManagerGlobal.instance.playerData.volumeSfx = value;
 
             for (int i = 0; i < _audioSrcEffects.Count; i++)
-                _audioSrcEffects[i].volume = _volumeSfx;
+                _audioSrcEffects[i].volume = value;
 
-            _txtSfx.text = (_volumeSfx * 100f).ToString("N0");
+            _txtSfx.text = (value * 100f).ToString("N0");
         }
     }
 
@@ -63,9 +58,6 @@ public class ManagerSound : MonoBehaviour
         }
         
         instance = this;
-        DontDestroyOnLoad(gameObject);
-
-        LoadSetting();
     }
 
 
@@ -111,16 +103,6 @@ public class ManagerSound : MonoBehaviour
 
     public void CloseSetting(){
         _pnlSettingWindows.SetActive(false);
-        SaveSetting();
-    }
-
-    void LoadSetting(){
-        pVolumeBgm = PlayerPrefs.HasKey("VolumeBgm") ? PlayerPrefs.GetFloat("VolumeBgm") : 0.4f;
-        pVolumeSfx = PlayerPrefs.HasKey("VolumeSfx") ? PlayerPrefs.GetFloat("VolumeSfx") : 1f;
-    }
-
-    void SaveSetting(){
-        PlayerPrefs.SetFloat("VolumeBgm", pVolumeBgm);
-        PlayerPrefs.SetFloat("VolumeSfx", pVolumeSfx);
+        ManagerGlobal.instance.playerData.SaveData();
     }
 }

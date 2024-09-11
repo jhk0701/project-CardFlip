@@ -28,6 +28,7 @@ public class Card : MonoBehaviour
     }
 
     public bool isLast;
+    [SerializeField] GameObject _lock;
 
     public int index {
         get;
@@ -48,7 +49,14 @@ public class Card : MonoBehaviour
         SpriteRenderer spriteRenderer = front.GetComponent<SpriteRenderer>();        
         if(spriteRenderer != null)
             spriteRenderer.sprite = sprite;
+
         isLast = lastCard;
+
+        if(isLast)
+        {
+            _lock.SetActive(isLast);
+            GameManager.instance.lockedCard = this;
+        }
     }
 
     public void OpenCard()
@@ -87,6 +95,10 @@ public class Card : MonoBehaviour
         anim.SetBool("isOpen", false);
         front.SetActive(false);
         back.SetActive(true);
+    }
+
+    public void ReleaseLock(){
+        _lock.SetActive(false);
     }
 
 }

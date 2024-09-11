@@ -6,12 +6,6 @@ public class ClickEffect : MonoBehaviour
 {
     public GameObject clickEffect;
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
-
-
 
     void Update()
     {
