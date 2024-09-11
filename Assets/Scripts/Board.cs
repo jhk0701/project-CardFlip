@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using UnityEngine;
 
@@ -16,7 +15,9 @@ public class Board : MonoBehaviour
         arr = arr.OrderBy(x => UnityEngine.Random.Range(0, 7)).ToArray();
 
         GameManager.instance.SetCardCnt(arr.Length);
-        int lastCard = UnityEngine.Random.Range(0, arr.Length);
+        int lastCard = -1; // UnityEngine.Random.Range(0, arr.Length);
+        if(ManagerGlobal.instance.curPlayingStage > 0)
+            lastCard = Random.Range(0, arr.Length);
 
         for (int i = 0; i < arr.Length; i++)
         {

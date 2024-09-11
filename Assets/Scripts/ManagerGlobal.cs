@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class ManagerGlobal : MonoBehaviour
 {
     public static ManagerGlobal instance;
+    public int curPlayingStage = 0;
     public PlayerData playerData;
 
     public enum eScene : int{
@@ -16,10 +17,12 @@ public class ManagerGlobal : MonoBehaviour
 
     private void Awake()
     {
-        if(instance) return;
+        if(instance){
+            Destroy(gameObject);
+            return;
+        }
 
         instance = this;
-
         DontDestroyOnLoad(gameObject);
     }
 

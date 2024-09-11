@@ -15,15 +15,24 @@ public class ManagerStart : MonoBehaviour
 
     public void OpenStage(){
         _pnlSelectStage.SetActive(true);
+
         List<bool> clearedScene = ManagerGlobal.instance.playerData.clearedStage;
-        for (int i = 1; i < clearedScene.Count; i++)
+
+        int maxStage = -1;
+        for (int i = 0; i < clearedScene.Count; i++)
         {
             _btnStages[i].interactable = clearedScene[i];
+            if(clearedScene[i])
+                maxStage = i;
         }
+        
+        int curStage = maxStage + 1;
+        if(curStage < clearedScene.Count)
+            _btnStages[curStage].interactable = true;
     }
     
     public void SelectStage(int id){
-
-
+        ManagerGlobal.instance.curPlayingStage = id;
+        ManagerGlobal.instance.LoadScene((int)ManagerGlobal.eScene.GameScene);
     }
 }

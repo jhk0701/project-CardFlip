@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using System;
 
 public class GameManager : MonoBehaviour
@@ -38,7 +37,9 @@ public class GameManager : MonoBehaviour
 
    
     void Start()
-    {   
+    {
+        Debug.Log("cur stage is " + ManagerGlobal.instance.curPlayingStage);
+        
         if(_pnlGameOver.activeInHierarchy)
             _pnlGameOver.SetActive(false);
 
@@ -121,23 +122,35 @@ public class GameManager : MonoBehaviour
     }
 
     public void GameOver(bool isWin){
-        if(isWin)
-        {
-            SceneManager.LoadScene(2);
-            ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Main);
-            return;
-        }
+        // if(isWin)
+        // {
+        //     SceneManager.LoadScene(2);
+        //     ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Main);
+        //     return;
+        // }
 
         RedBackground.SetActive(false);
         _isPlaying = false;
 
         _pnlGameOver.SetActive(true);
         _txtGameResult.text = isWin ? "축하합니다!\n" : "실패했어요...";
+        
+        if(isWin)
+        {
+            ManagerGlobal.instance.playerData.UpdateSceneClear(
+                ManagerGlobal.instance.curPlayingStage,
+                true);
+            ManagerGlobal.instance.playerData.SaveData();
+        }
     }
 
     public void Retry(){
-        SceneManager.LoadScene(1);
+        ManagerGlobal.instance.LoadScene((int)ManagerGlobal.eScene.GameScene);
         ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Main);
+    }
+
+    public void Exit(){
+        ManagerGlobal.instance.LoadScene((int)ManagerGlobal.eScene.StartScene);
     }
 
     

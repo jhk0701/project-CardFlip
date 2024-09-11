@@ -52,12 +52,8 @@ public class ManagerSound : MonoBehaviour
 
     public void Awake()
     {
-        if(instance){
-            Destroy(gameObject);
-            return;
-        }
-        
-        instance = this;
+        if(!instance) 
+            instance = this;
     }
 
 
