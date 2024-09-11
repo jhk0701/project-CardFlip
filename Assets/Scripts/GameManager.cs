@@ -151,6 +151,8 @@ public class GameManager : MonoBehaviour
         
         if(isWin)
         {
+            ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Victory);
+            
             ManagerGlobal.instance.playerData.UpdateSceneClear(
                 ManagerGlobal.instance.curPlayingStage,
                 true);
@@ -192,7 +194,7 @@ public class GameManager : MonoBehaviour
 
         t.text = $"{(val > 0 ? "+" : "")}{val} sec";
         t.color = _colBonusTime[Convert.ToInt16(val > 0)];
-        
+
         t.gameObject.SetActive(true);
     }
 

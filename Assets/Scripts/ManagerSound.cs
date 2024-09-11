@@ -10,7 +10,7 @@ public class ManagerSound : MonoBehaviour
         None, Main, Emergence
     }
     public enum TypeSfx : int {
-        Touch = 0, Success = 1, Fail = 2
+        Touch = 0, Success = 1, Fail = 2, Victory = 3
     }
 
 
