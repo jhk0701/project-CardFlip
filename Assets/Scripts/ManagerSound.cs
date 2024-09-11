@@ -5,17 +5,18 @@ using UnityEngine.UI;
 
 public class ManagerSound : MonoBehaviour
 {
-     public static ManagerSound instance;
-
-    [SerializeField] AudioSource _audioSrcMain;
-    [SerializeField] List<AudioSource> _audioSrcEffects;
-
+    public static ManagerSound instance;
     public enum TypeBgm {
         Main, Emergence
     }
     public enum TypeSfx : int {
         Touch = 0, Success = 1, Fail = 2
     }
+
+
+    TypeBgm _curBgm;
+    [SerializeField] AudioSource _audioSrcMain;
+    [SerializeField] List<AudioSource> _audioSrcEffects;
 
     [Header("BGM")]
     [SerializeField] AudioClip _clipMainBgm;
@@ -56,8 +57,16 @@ public class ManagerSound : MonoBehaviour
             instance = this;
     }
 
+    void Start()
+    {
+        pVolumeBgm = ManagerGlobal.instance.playerData.volumeBgm;
+        pVolumeSfx = ManagerGlobal.instance.playerData.volumeSfx;
+    }
+
 
     public void StartBgm(TypeBgm bgm){
+        if(bgm.Equals(_curBgm)) return;
+
         _audioSrcMain.Stop();
         
         switch(bgm){
