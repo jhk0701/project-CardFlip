@@ -27,6 +27,8 @@ public class Card : MonoBehaviour
         }
     }
 
+    public bool isLast;
+
     public int index {
         get;
         private set;
@@ -39,22 +41,26 @@ public class Card : MonoBehaviour
         anim.Play("CardIdle", -1, UnityEngine.Random.Range(0f, 1f));
     }
 
-    public void Set(int index, Vector2 position, Sprite sprite/*, Func<Card, bool> function*/)
+    public void Set(int index, Vector2 position, Sprite sprite, bool lastCard = false)
     {
         this.index = index;
         getTransform.position = position;
-        SpriteRenderer spriteRenderer = front.GetComponent<SpriteRenderer>();
-        
+        SpriteRenderer spriteRenderer = front.GetComponent<SpriteRenderer>();        
         if(spriteRenderer != null)
             spriteRenderer.sprite = sprite;
+        isLast = lastCard;
     }
 
     public void OpenCard()
     {
+        if(isLast == true && GameManager.instance._cardCount != 2)
+        {
+            Debug.Log("접근 불가");
+            return;
+        }
         anim.SetBool("isOpen", true);
         front.SetActive(true);
         back.SetActive(false);
-
         GameManager.instance.SelectCard(this);
     }
 

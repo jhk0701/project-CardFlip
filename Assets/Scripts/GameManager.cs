@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,9 +15,15 @@ public class GameManager : MonoBehaviour
     public Text timeTxt;
     float _time = 0.0f;
     public GameObject RedBackground;
+    [Space(10f)]
+    [SerializeField] Color[] _colBonusTime;
+    [SerializeField] Text _prefBonusTime;
+    [SerializeField] Transform _tfBonusTime;
+    Queue<Text> _instBonusTime = new Queue<Text>(); // object poolling
+    
 
     [Header("Card")]
-    [SerializeField] int _cardCount = 16;
+    public int _cardCount = 16;
     public Card selectedCard;
 
     [Header("Panel")]
@@ -37,6 +44,8 @@ public class GameManager : MonoBehaviour
         _isPlaying = true;
         Time.timeScale = 1.0f;
         _time = 30f;
+
+        InitBonusTime();
     }
 
     private void Update()
@@ -95,8 +104,11 @@ public class GameManager : MonoBehaviour
             c.DestroyCard();
 
             SetCardCnt(_cardCount - 2);
-
+            
             ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Success);
+
+            // bonus
+            AddTime(3f);
         }
         else{
             // not match
@@ -107,6 +119,9 @@ public class GameManager : MonoBehaviour
             c.CloseCard(0.8f);
 
             ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Fail);
+
+            //penalty
+            AddTime(-1f);
         }
 
         selectedCard = null;
@@ -131,4 +146,28 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(1);
         ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Main);
     }
+
+    
+    void InitBonusTime(){
+        for (int i = 0; i < 5; i++)
+        {
+            Text inst = Instantiate(_prefBonusTime, _tfBonusTime);
+            inst.gameObject.SetActive(false);
+
+            _instBonusTime.Enqueue(inst);
+        }
+    }
+
+    void AddTime(float val){
+        _time += val;
+
+        Text t = _instBonusTime.Dequeue();
+        _instBonusTime.Enqueue(t);
+        t.gameObject.SetActive(false);
+
+        t.text = $"{(val > 0 ? "+" : "")}{val} sec";
+        t.color = _colBonusTime[Convert.ToInt16(val > 0)];
+        t.gameObject.SetActive(true);
+    }
+
 }
