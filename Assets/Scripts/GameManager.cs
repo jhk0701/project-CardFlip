@@ -117,8 +117,8 @@ public class GameManager : MonoBehaviour
         }
         else{
             // not match
-            selectedCard.GetComponent<Animator>().SetTrigger("failTrigger");
-            c.GetComponent<Animator>().SetTrigger("failTrigger");
+            selectedCard.anim.SetTrigger("failTrigger");
+            c.anim.SetTrigger("failTrigger");
             
             selectedCard.CloseCard(0.8f);
             c.CloseCard(0.8f);
@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
         //     return;
         // }
         ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Main);
-        
+
         RedBackground.SetActive(false);
         _isPlaying = false;
 
