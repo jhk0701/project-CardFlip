@@ -49,4 +49,14 @@ public class PlayerData : MonoBehaviour
         clearedStage[id] = isClear;
     }
 
+    [ContextMenu("Clear scene play data")]
+    public void ClearSceneData(){
+        for (int i = 0; i < clearedStage.Count; i++)
+        {
+            string key = $"{SCENE}-{i}";
+            clearedStage[i] = false;
+            PlayerPrefs.SetInt(key, 0);
+        }
+    }
+
 }

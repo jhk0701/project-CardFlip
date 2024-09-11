@@ -35,4 +35,8 @@ public class ManagerStart : MonoBehaviour
         ManagerGlobal.instance.curPlayingStage = id;
         ManagerGlobal.instance.LoadScene((int)ManagerGlobal.eScene.GameScene);
     }
+
+    public void ClearData(){
+        ManagerGlobal.instance.playerData.ClearSceneData();
+    }
 }
