@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ManagerSound : MonoBehaviour
 {
@@ -23,6 +24,37 @@ public class ManagerSound : MonoBehaviour
     [Header("Effect")]
     [SerializeField] List<AudioClip> _clips;
 
+    [Header("Volume")]
+    [Range(0f, 1f)]
+    [SerializeField] float _volumeBgm;
+    float pVolumeBgm{
+        get { return _volumeBgm; }
+        set {
+            _volumeBgm = value;
+            _audioSrcMain.volume = _volumeBgm;
+            _txtBgm.text = (_volumeBgm * 100f).ToString("N0");
+        }
+    }
+    
+    [Range(0f, 1f)]
+    [SerializeField] float _volumeSfx;
+    float pVolumeSfx{
+        get { return _volumeSfx; }
+        set {
+            _volumeSfx = value;
+
+            for (int i = 0; i < _audioSrcEffects.Count; i++)
+                _audioSrcEffects[i].volume = _volumeSfx;
+
+            _txtSfx.text = (_volumeSfx * 100f).ToString("N0");
+        }
+    }
+
+    [Header("Setting Windows")]
+    [SerializeField] GameObject _pnlSettingWindows;
+    [SerializeField] Slider _slBgm, _slSfx;
+    [SerializeField] Text _txtBgm, _txtSfx;
+
     public void Awake()
     {
         if(instance){
@@ -32,6 +64,8 @@ public class ManagerSound : MonoBehaviour
         
         instance = this;
         DontDestroyOnLoad(gameObject);
+
+        LoadSetting();
     }
 
 
@@ -60,17 +94,33 @@ public class ManagerSound : MonoBehaviour
         _audioSrcEffects[(int)sfx].Play();
     }
 
-    [ContextMenu("Test")]
-    public void Test1(){
-        StartSfx(TypeSfx.Touch);
-        Invoke("Test2", 1f);
-        Invoke("Test3", 2f);
+
+    public void ChangeVolumeBgm(float val){
+        pVolumeBgm = val;
+    }
+    public void ChangeVolumeSfx(float val){
+        pVolumeSfx = val;
     }
 
-    void Test2(){
-        StartSfx(TypeSfx.Success);
+
+    public void OpenSetting(){
+        _pnlSettingWindows.SetActive(true);
+        _slBgm.SetValueWithoutNotify(pVolumeBgm);
+        _slSfx.SetValueWithoutNotify(pVolumeSfx);
     }
-    void Test3(){
-        StartSfx(TypeSfx.Fail);
+
+    public void CloseSetting(){
+        _pnlSettingWindows.SetActive(false);
+        SaveSetting();
+    }
+
+    void LoadSetting(){
+        pVolumeBgm = PlayerPrefs.HasKey("VolumeBgm") ? PlayerPrefs.GetFloat("VolumeBgm") : 0.4f;
+        pVolumeSfx = PlayerPrefs.HasKey("VolumeSfx") ? PlayerPrefs.GetFloat("VolumeSfx") : 1f;
+    }
+
+    void SaveSetting(){
+        PlayerPrefs.SetFloat("VolumeBgm", pVolumeBgm);
+        PlayerPrefs.SetFloat("VolumeSfx", pVolumeSfx);
     }
 }
