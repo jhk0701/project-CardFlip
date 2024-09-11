@@ -141,12 +141,6 @@ public class GameManager : MonoBehaviour
     }
 
     public void GameOver(bool isWin){
-        // if(isWin)
-        // {
-        //     SceneManager.LoadScene(2);
-        //     ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Main);
-        //     return;
-        // }
         ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Main);
 
         RedBackground.SetActive(false);
@@ -198,6 +192,7 @@ public class GameManager : MonoBehaviour
 
         t.text = $"{(val > 0 ? "+" : "")}{val} sec";
         t.color = _colBonusTime[Convert.ToInt16(val > 0)];
+        
         t.gameObject.SetActive(true);
     }
 
