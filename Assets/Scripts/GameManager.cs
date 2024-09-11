@@ -85,6 +85,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void PlayEffect(Card card, string Success)
+    {
+        GameObject SuccessEffect = Instantiate(Resources.Load(Success), card.transform.position, Quaternion.identity) as GameObject;
+        Destroy(SuccessEffect, 1f);
+    }
+
     public void SelectCard(Card c){
         
         if(selectedCard == null)
@@ -97,6 +103,8 @@ public class GameManager : MonoBehaviour
 
         if(c.index.Equals(selectedCard.index)){
             // match
+            PlayEffect(selectedCard, "Success");
+            PlayEffect(c, "Success");
             selectedCard.DestroyCard();
             c.DestroyCard();
 
@@ -109,8 +117,11 @@ public class GameManager : MonoBehaviour
         }
         else{
             // not match
-            selectedCard.CloseCard(0.5f);
-            c.CloseCard(0.5f);
+            selectedCard.GetComponent<Animator>().SetTrigger("failTrigger");
+            c.GetComponent<Animator>().SetTrigger("failTrigger");
+            
+            selectedCard.CloseCard(0.8f);
+            c.CloseCard(0.8f);
 
             ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Fail);
 
