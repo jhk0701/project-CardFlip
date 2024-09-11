@@ -27,10 +27,7 @@ public class Card : MonoBehaviour
         }
     }
 
-    public bool isLast {
-        private set;
-        get;
-    }
+    public bool isLast;
 
     public int index {
         get;
