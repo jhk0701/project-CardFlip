@@ -100,8 +100,8 @@ public class GameManager : MonoBehaviour
         }
         else{
             // not match
-            selectedCard.CloseCard(1f);
-            c.CloseCard(1f);
+            selectedCard.CloseCard(0.8f);
+            c.CloseCard(0.8f);
 
             ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Fail);
         }
