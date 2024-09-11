@@ -171,6 +171,26 @@ MonoBehaviour:
   _btnStages:
   - {fileID: 218982921}
   - {fileID: 1595753580}
+--- !u!1 &136463144 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3686522228229612988, guid: f770010496e6ee442abcff3919666a6c, type: 3}
+  m_PrefabInstance: {fileID: 285614022}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &136463148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136463144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0.9912857, b: 0.7688679, a: 0.45490196}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &173605127
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,6 +559,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4172999350018405864, guid: f770010496e6ee442abcff3919666a6c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5390869077689131803, guid: f770010496e6ee442abcff3919666a6c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.2
@@ -658,7 +682,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3686522228229612988, guid: f770010496e6ee442abcff3919666a6c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 136463148}
   m_SourcePrefab: {fileID: 100100000, guid: f770010496e6ee442abcff3919666a6c, type: 3}
 --- !u!1 &432711761
 GameObject:
@@ -2250,6 +2277,7 @@ GameObject:
   - component: {fileID: 2113489425}
   - component: {fileID: 2113489424}
   - component: {fileID: 2113489426}
+  - component: {fileID: 2113489427}
   m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
@@ -2339,6 +2367,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2113489427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113489422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0.9990406, b: 0.995283, a: 0.62352943}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &2116652281
 GameObject:
   m_ObjectHideFlags: 0
