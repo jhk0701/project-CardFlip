@@ -30,12 +30,13 @@ public class Board : MonoBehaviour
     {
         int[] arr = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
         arr = arr.OrderBy(x => UnityEngine.Random.Range(0, 7)).ToArray();
-        for (int i = 0; i < 16; i++)
+        int lastCard = UnityEngine.Random.Range(0, arr.Length);
+        for (int i = 0; i < arr.Length; i++)
         {
             Card card = Instantiate(cardPrefab, transform);
             float x = (i % 4) * 1.4f - 2.1f;
             float y = (i / 4) * 1.4f - 3.0f;
-            card.Set(arr[i], new Vector2(x, y), sprites[arr[i]]);
+            card.Set(arr[i], new Vector2(x, y), sprites[arr[i]], lastCard == i);
             //switch(arr[i]) {
             //    case 0:
             //        //card.Set(0, new Vector2(x, y), junghwan1, CanOpenCard);

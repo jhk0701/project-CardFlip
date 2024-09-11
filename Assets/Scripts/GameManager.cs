@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public GameObject RedBackground;
 
     [Header("Card")]
-    [SerializeField] int _cardCount = 16;
+    public int _cardCount = 16;
     public Card selectedCard;
 
     [Header("Panel")]
