@@ -153,6 +153,9 @@ public class GameManager : MonoBehaviour
                 ManagerGlobal.instance.curPlayingStage,
                 true);
             ManagerGlobal.instance.playerData.SaveData();
+
+            if(ManagerGlobal.instance.curPlayingStage.Equals(ManagerGlobal.instance.playerData.sceneCount - 1))
+                ManagerGlobal.instance.LoadScene((int)ManagerGlobal.eScene.EndingScene);
         }
     }
 

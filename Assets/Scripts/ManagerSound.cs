@@ -65,10 +65,11 @@ public class ManagerSound : MonoBehaviour
 
 
     public void StartBgm(TypeBgm bgm){
-        if(bgm.Equals(_curBgm)) return;
-
-        _audioSrcMain.Stop();
+        if(bgm.Equals(_curBgm))
+            return;
         
+        _curBgm = bgm;
+        _audioSrcMain.Stop();
         switch(bgm){
             case TypeBgm.Main :
             _audioSrcMain.clip = _clipMainBgm;
