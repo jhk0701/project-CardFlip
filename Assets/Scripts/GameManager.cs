@@ -71,6 +71,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void PlayEffect(Card card, string Success)
+    {
+        GameObject SuccessEffect = Instantiate(Resources.Load(Success), card.transform.position, Quaternion.identity) as GameObject;
+        Destroy(SuccessEffect, 1f);
+    }
+
     public void SelectCard(Card c){
         
         if(selectedCard == null)
@@ -83,6 +89,8 @@ public class GameManager : MonoBehaviour
 
         if(c.index.Equals(selectedCard.index)){
             // match
+            PlayEffect(selectedCard, "Success");
+            PlayEffect(c, "Success");
             selectedCard.DestroyCard();
             c.DestroyCard();
 
