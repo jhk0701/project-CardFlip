@@ -7,14 +7,14 @@ public class ManagerSound : MonoBehaviour
 {
     public static ManagerSound instance;
     public enum TypeBgm {
-        Main, Emergence
+        None, Main, Emergence
     }
     public enum TypeSfx : int {
         Touch = 0, Success = 1, Fail = 2
     }
 
 
-    TypeBgm _curBgm;
+    TypeBgm _curBgm = TypeBgm.None;
     [SerializeField] AudioSource _audioSrcMain;
     [SerializeField] List<AudioSource> _audioSrcEffects;
 
