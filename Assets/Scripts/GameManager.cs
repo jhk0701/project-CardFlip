@@ -100,6 +100,9 @@ public class GameManager : MonoBehaviour
         }
         else{
             // not match
+            selectedCard.GetComponent<Animator>().SetTrigger("failTrigger");
+            c.GetComponent<Animator>().SetTrigger("failTrigger");
+            
             selectedCard.CloseCard(0.8f);
             c.CloseCard(0.8f);
 
