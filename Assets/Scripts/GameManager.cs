@@ -139,7 +139,8 @@ public class GameManager : MonoBehaviour
         //     ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Main);
         //     return;
         // }
-
+        ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Main);
+        
         RedBackground.SetActive(false);
         _isPlaying = false;
 
