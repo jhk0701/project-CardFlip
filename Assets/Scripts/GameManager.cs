@@ -151,8 +151,8 @@ public class GameManager : MonoBehaviour
         
         if(isWin)
         {
-            ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Victory);
-            
+            ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Victory, true);
+
             ManagerGlobal.instance.playerData.UpdateSceneClear(
                 ManagerGlobal.instance.curPlayingStage,
                 true);

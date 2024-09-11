@@ -83,13 +83,26 @@ public class ManagerSound : MonoBehaviour
         _audioSrcMain.Play();
     }
 
-    public void StartSfx(TypeSfx sfx){
-
-        _audioSrcEffects[(int)sfx].Stop();
+    public void StartSfx(TypeSfx sfx, bool isEmphasized = false){
         
         _audioSrcEffects[(int)sfx].clip = _clips[(int)sfx];
+        if(isEmphasized)
+            StartCoroutine(EmphasizeSfx(_audioSrcEffects[(int)sfx]));
+
+        
 
         _audioSrcEffects[(int)sfx].Play();
+    }
+
+    IEnumerator EmphasizeSfx(AudioSource audioSrc){
+        float origin = _audioSrcMain.volume;
+
+        if(_audioSrcMain.volume > 0.1f)
+            _audioSrcMain.volume = 0.1f;
+        
+        yield return new WaitForSeconds(audioSrc.clip.length - 1f);
+            
+         _audioSrcMain.volume = origin;
     }
 
 
