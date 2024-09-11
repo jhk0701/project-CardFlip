@@ -15,7 +15,8 @@ public class Board : MonoBehaviour
         arr = arr.OrderBy(x => UnityEngine.Random.Range(0, 7)).ToArray();
 
         GameManager.instance.SetCardCnt(arr.Length);
-        int lastCard = -1; // UnityEngine.Random.Range(0, arr.Length);
+        int lastCard = -1; 
+        
         if(ManagerGlobal.instance.curPlayingStage > 0)
             lastCard = Random.Range(0, arr.Length);
 
@@ -24,36 +25,9 @@ public class Board : MonoBehaviour
             Card card = Instantiate(cardPrefab, transform);
             float x = (i % 4) * 1.4f - 2.1f;
             float y = (i / 4) * 1.4f - 3.0f;
+
             card.Set(arr[i], new Vector2(x, y), sprites[arr[i]], lastCard == i);
         }
     }
 
-    // private Card compareCard = null;
-    // private bool CanOpenCard(Card card)
-    // {
-    //     if(GameManager.instance.time < 30)
-    //     {
-    //         if(compareCard == null)
-    //         {
-    //             compareCard = card;
-    //             return true;
-    //         }
-    //         else if(compareCard != card)
-    //         {
-    //             if(compareCard.index == card.index)
-    //             {
-    //                 compareCard.DestroyCard();
-    //                 card.DestroyCard();
-    //             }
-    //             else
-    //             {
-    //                 compareCard.CloseCard();
-    //                 card.CloseCard();
-    //             }
-    //             compareCard = null;
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
 }

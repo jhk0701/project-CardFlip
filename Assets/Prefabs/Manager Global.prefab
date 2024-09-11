@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 603465125862669073, guid: 44fa6be64765a3242882258f6b05e717, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3314397787099339306, guid: 44fa6be64765a3242882258f6b05e717, type: 3}
       propertyPath: m_Name
       value: Manager Global
@@ -83,6 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8fbc2ca03d103e4a990b3fb9f2650b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curPlayingStage: 0
   playerData: {fileID: 2536691749590381469}
 --- !u!114 &2536691749590381469
 MonoBehaviour:
@@ -96,6 +101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac05fe81d54320459267b0b244105dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneCount: 2
+  clearedStage: 
   volumeBgm: 0
   volumeSfx: 0
 --- !u!114 &8803266306812960204

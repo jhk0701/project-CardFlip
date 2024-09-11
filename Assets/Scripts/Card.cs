@@ -1,4 +1,4 @@
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,7 +39,7 @@ public class Card : MonoBehaviour
 
     void Start()
     {
-        anim.Play("CardIdle", -1, UnityEngine.Random.Range(0f, 1f));
+        anim.Play("CardIdle", -1, Random.Range(0f, 1f));
     }
 
     public void Set(int index, Vector2 position, Sprite sprite, bool lastCard = false)
@@ -66,6 +66,7 @@ public class Card : MonoBehaviour
             Debug.Log("접근 불가");
             return;
         }
+        
         anim.SetBool("isOpen", true);
         front.SetActive(true);
         back.SetActive(false);

@@ -30,6 +30,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _pnlGameOver;
     [SerializeField] Text _txtGameResult;
 
+  
+    [Serializable]
+    public struct StageDifficulty{
+        public int stage;
+        public float bonus;
+        public float penalty;
+    }
+    [Header("Difficulty")]
+    public List<StageDifficulty> stageDifficulies;
+
     private void Awake()
     {
         if (instance == null) instance = this;
@@ -38,8 +48,6 @@ public class GameManager : MonoBehaviour
    
     void Start()
     {
-        Debug.Log("cur stage is " + ManagerGlobal.instance.curPlayingStage);
-        
         if(_pnlGameOver.activeInHierarchy)
             _pnlGameOver.SetActive(false);
 
@@ -113,7 +121,7 @@ public class GameManager : MonoBehaviour
             ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Success);
 
             // bonus
-            AddTime(3f);
+            AddTime(stageDifficulies[ManagerGlobal.instance.curPlayingStage].bonus);
         }
         else{
             // not match
@@ -126,19 +134,13 @@ public class GameManager : MonoBehaviour
             ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Fail);
 
             //penalty
-            AddTime(-1f);
+            AddTime(stageDifficulies[ManagerGlobal.instance.curPlayingStage].penalty);
         }
 
         selectedCard = null;
     }
 
     public void GameOver(bool isWin){
-        // if(isWin)
-        // {
-        //     SceneManager.LoadScene(2);
-        //     ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Main);
-        //     return;
-        // }
         ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Main);
 
         RedBackground.SetActive(false);
@@ -149,6 +151,8 @@ public class GameManager : MonoBehaviour
         
         if(isWin)
         {
+            ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Victory, true);
+
             ManagerGlobal.instance.playerData.UpdateSceneClear(
                 ManagerGlobal.instance.curPlayingStage,
                 true);
@@ -180,6 +184,8 @@ public class GameManager : MonoBehaviour
     }
 
     void AddTime(float val){
+        if(val.Equals(0f)) return;
+
         _time += val;
 
         Text t = _instBonusTime.Dequeue();
@@ -188,6 +194,7 @@ public class GameManager : MonoBehaviour
 
         t.text = $"{(val > 0 ? "+" : "")}{val} sec";
         t.color = _colBonusTime[Convert.ToInt16(val > 0)];
+
         t.gameObject.SetActive(true);
     }
 
