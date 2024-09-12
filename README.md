@@ -30,8 +30,12 @@
 > 이펙트 및 사운드 추가
 
 ## Trouble Shooting
-<details>
-  <summary></summary>
+<details> 
+  <summary><h3>Merge Conflict</h3></summary>
+<h3>원인</h3>
+  
+  기능을 너무 세부적으로 나눠서 분담한 결과 공통 작업 영역이 생겼습니다.
+그러다 보니 2명의 작업자가 하나의 스크립트와 프리팹을 수정했습니다.
 </details>
 
 ### 기타
