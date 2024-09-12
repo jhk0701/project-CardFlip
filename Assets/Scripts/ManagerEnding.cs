@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class ManagerEnding : MonoBehaviour
 {
@@ -78,6 +77,6 @@ public class ManagerEnding : MonoBehaviour
 
 
     public void GoToGameScene(){
-        SceneManager.LoadScene(1);
+        ManagerGlobal.instance.LoadScene((int)ManagerGlobal.eScene.StartScene);
     }
 }
