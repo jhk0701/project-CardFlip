@@ -9,7 +9,7 @@ public class ManagerGlobal : MonoBehaviour
     public int curPlayingStage = 0;
     public PlayerData playerData;
 
-    public enum eScene : int{
+    public enum EScene : int{
         StartScene = 0,
         GameScene = 1,
         EndingScene = 2,

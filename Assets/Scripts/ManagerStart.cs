@@ -33,7 +33,7 @@ public class ManagerStart : MonoBehaviour
     
     public void SelectStage(int id){
         ManagerGlobal.instance.curPlayingStage = id;
-        ManagerGlobal.instance.LoadScene((int)ManagerGlobal.eScene.GameScene);
+        ManagerGlobal.instance.LoadScene((int)ManagerGlobal.EScene.GameScene);
     }
 
     public void ClearData(){

@@ -99,17 +99,17 @@ public class GameManager : MonoBehaviour
             ManagerGlobal.instance.playerData.SaveData();
 
             if(ManagerGlobal.instance.curPlayingStage.Equals(ManagerGlobal.instance.playerData.sceneCount - 1))
-                ManagerGlobal.instance.LoadScene((int)ManagerGlobal.eScene.EndingScene);
+                ManagerGlobal.instance.LoadScene((int)ManagerGlobal.EScene.EndingScene);
         }
     }
 
     public void Retry(){
-        ManagerGlobal.instance.LoadScene((int)ManagerGlobal.eScene.GameScene);
+        ManagerGlobal.instance.LoadScene((int)ManagerGlobal.EScene.GameScene);
         ManagerSound.instance.StartBgm(ManagerSound.ETypeBgm.Main);
     }
 
     public void Exit(){
-        ManagerGlobal.instance.LoadScene((int)ManagerGlobal.eScene.StartScene);
+        ManagerGlobal.instance.LoadScene((int)ManagerGlobal.EScene.StartScene);
     }
 
     

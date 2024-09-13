@@ -69,7 +69,7 @@ public class ManagerSound : MonoBehaviour
         for (int i = 0; i < _clips.Count; i++)
         {
             AudioSource src = _goEffect.AddComponent<AudioSource>();
-            
+
             _audioSrcEffects.Add(src);
             src.playOnAwake = false;
             src.loop = false;
@@ -104,8 +104,6 @@ public class ManagerSound : MonoBehaviour
         _audioSrcEffects[(int)sfx].clip = _clips[(int)sfx];
         if(isEmphasized)
             StartCoroutine(EmphasizeSfx(_audioSrcEffects[(int)sfx]));
-
-        
 
         _audioSrcEffects[(int)sfx].Play();
     }

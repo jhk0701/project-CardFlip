@@ -77,6 +77,6 @@ public class ManagerEnding : MonoBehaviour
 
 
     public void GoToGameScene(){
-        ManagerGlobal.instance.LoadScene((int)ManagerGlobal.eScene.StartScene);
+        ManagerGlobal.instance.LoadScene((int)ManagerGlobal.EScene.StartScene);
     }
 }
