@@ -134,7 +134,8 @@
       <b>해결 : </b><br/>
       이 그리는 방식을 Screen Space - Camera로 변경하는 것입니다.<br/>
       단, 이 기능을 사용하면 캔버스에 카메라를 할당해야고 그 카메라를 가지고 렌더링에 이용합니다.<br/>
-      카메라의 ClearFlags를 Depth only로 변경해주어야 합니다.<br/><br/>
+      카메라의 ClearFlags를 Depth only로 변경해주어야 합니다.<br/>
+      <br/><img src="https://github.com/user-attachments/assets/6ccd1b22-5b7b-43c9-b267-c7dc8ddc9ccb" width=900px></img><br/><br/>
       이 기능을 이용하면 UI 캔버스는 일반적인 크기까지 작아집니다.<br/>
       또한 지정한 카메라로부터 plane distance 만큼의 거리까지 이동합니다.<br/><br/>
       이렇게 되면 기존의 오브젝트들은 카메라와 UI 사이에 배치가 되고<br/>
