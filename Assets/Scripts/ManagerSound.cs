@@ -6,17 +6,18 @@ using UnityEngine.UI;
 public class ManagerSound : MonoBehaviour
 {
     public static ManagerSound instance;
-    public enum TypeBgm {
+    public enum ETypeBgm {
         None, Main, Emergence
     }
-    public enum TypeSfx : int {
+    public enum ETypeSfx : int {
         Touch = 0, Success = 1, Fail = 2, Victory = 3
     }
 
 
-    TypeBgm _curBgm = TypeBgm.None;
+    ETypeBgm _curBgm = ETypeBgm.None;
     [SerializeField] AudioSource _audioSrcMain;
-    [SerializeField] List<AudioSource> _audioSrcEffects;
+    GameObject _goEffect;
+    List<AudioSource> _audioSrcEffects = new List<AudioSource>();
 
     [Header("BGM")]
     [SerializeField] AudioClip _clipMainBgm;
@@ -59,23 +60,38 @@ public class ManagerSound : MonoBehaviour
 
     void Start()
     {
+        if(_goEffect == null)
+        {
+            _goEffect = new GameObject("Sound Effect");
+            _goEffect.transform.SetParent(transform);
+        }
+
+        for (int i = 0; i < _clips.Count; i++)
+        {
+            AudioSource src = _goEffect.AddComponent<AudioSource>();
+            
+            _audioSrcEffects.Add(src);
+            src.playOnAwake = false;
+            src.loop = false;
+        }
+
         pVolumeBgm = ManagerGlobal.instance.playerData.volumeBgm;
         pVolumeSfx = ManagerGlobal.instance.playerData.volumeSfx;
     }
 
 
-    public void StartBgm(TypeBgm bgm){
+    public void StartBgm(ETypeBgm bgm){
         if(bgm.Equals(_curBgm))
             return;
         
         _curBgm = bgm;
         _audioSrcMain.Stop();
         switch(bgm){
-            case TypeBgm.Main :
+            case ETypeBgm.Main :
             _audioSrcMain.clip = _clipMainBgm;
             break;
 
-            case TypeBgm.Emergence : 
+            case ETypeBgm.Emergence : 
             _audioSrcMain.clip = _clipEmergencyBgm;
             break;
         }
@@ -83,7 +99,7 @@ public class ManagerSound : MonoBehaviour
         _audioSrcMain.Play();
     }
 
-    public void StartSfx(TypeSfx sfx, bool isEmphasized = false){
+    public void StartSfx(ETypeSfx sfx, bool isEmphasized = false){
         
         _audioSrcEffects[(int)sfx].clip = _clips[(int)sfx];
         if(isEmphasized)

@@ -57,7 +57,7 @@ public class Board : MonoBehaviour
         if(selectedCard == null)
         {
             selectedCard = c;
-            ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Touch);
+            ManagerSound.instance.StartSfx(ManagerSound.ETypeSfx.Touch);
 
             return;
         }
@@ -71,7 +71,7 @@ public class Board : MonoBehaviour
 
             SetCardCnt(cardCount - 2);
             
-            ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Success);
+            ManagerSound.instance.StartSfx(ManagerSound.ETypeSfx.Success);
 
             // bonus
             GameManager.instance.AddTime(true);
@@ -84,7 +84,7 @@ public class Board : MonoBehaviour
             selectedCard.CloseCard(0.8f);
             c.CloseCard(0.8f);
 
-            ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Fail);
+            ManagerSound.instance.StartSfx(ManagerSound.ETypeSfx.Fail);
 
             //penalty
             GameManager.instance.AddTime(false);

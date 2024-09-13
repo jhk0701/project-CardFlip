@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
         public float bonus;
         public float penalty;
     }
+
     [Header("Difficulty")]
     public List<StageDifficulty> stageDifficulies;
 
@@ -65,7 +66,7 @@ public class GameManager : MonoBehaviour
         if (_time <= 10f && !RedBackground.activeInHierarchy)
         {
             RedBackground.SetActive(true);
-            ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Emergence);
+            ManagerSound.instance.StartBgm(ManagerSound.ETypeBgm.Emergence);
         }
         else if (_time <= 0f)
         {
@@ -80,7 +81,7 @@ public class GameManager : MonoBehaviour
 
 
     public void GameOver(bool isWin){
-        ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Main);
+        ManagerSound.instance.StartBgm(ManagerSound.ETypeBgm.Main);
 
         RedBackground.SetActive(false);
         _isPlaying = false;
@@ -90,7 +91,7 @@ public class GameManager : MonoBehaviour
         
         if(isWin)
         {
-            ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Victory, true);
+            ManagerSound.instance.StartSfx(ManagerSound.ETypeSfx.Victory, true);
 
             ManagerGlobal.instance.playerData.UpdateSceneClear(
                 ManagerGlobal.instance.curPlayingStage,
@@ -104,7 +105,7 @@ public class GameManager : MonoBehaviour
 
     public void Retry(){
         ManagerGlobal.instance.LoadScene((int)ManagerGlobal.eScene.GameScene);
-        ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Main);
+        ManagerSound.instance.StartBgm(ManagerSound.ETypeBgm.Main);
     }
 
     public void Exit(){

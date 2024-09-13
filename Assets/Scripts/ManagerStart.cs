@@ -10,7 +10,7 @@ public class ManagerStart : MonoBehaviour
 
     private void Start()
     {
-        ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Main);
+        ManagerSound.instance.StartBgm(ManagerSound.ETypeBgm.Main);
     }
 
     public void OpenStage(){
