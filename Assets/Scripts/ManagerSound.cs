@@ -27,18 +27,18 @@ public class ManagerSound : MonoBehaviour
     [SerializeField] List<AudioClip> _clips;
 
     float pVolumeBgm{
-        get { return ManagerGlobal.instance.playerData.volumeBgm; }
+        get { return ManagerGlobal.instance.mData.volumeBgm; }
         set {
-            ManagerGlobal.instance.playerData.volumeBgm = value;
+            ManagerGlobal.instance.mData.volumeBgm = value;
             _audioSrcMain.volume = value;
             _txtBgm.text = (value * 100f).ToString("N0");
         }
     }
     
     float pVolumeSfx{
-        get { return ManagerGlobal.instance.playerData.volumeSfx; }
+        get { return ManagerGlobal.instance.mData.volumeSfx; }
         set {
-            ManagerGlobal.instance.playerData.volumeSfx = value;
+            ManagerGlobal.instance.mData.volumeSfx = value;
 
             for (int i = 0; i < _audioSrcEffects.Count; i++)
                 _audioSrcEffects[i].volume = value;
@@ -75,8 +75,8 @@ public class ManagerSound : MonoBehaviour
             src.loop = false;
         }
 
-        pVolumeBgm = ManagerGlobal.instance.playerData.volumeBgm;
-        pVolumeSfx = ManagerGlobal.instance.playerData.volumeSfx;
+        pVolumeBgm = ManagerGlobal.instance.mData.volumeBgm;
+        pVolumeSfx = ManagerGlobal.instance.mData.volumeSfx;
     }
 
 
@@ -136,6 +136,6 @@ public class ManagerSound : MonoBehaviour
 
     public void CloseSetting(){
         _pnlSettingWindows.SetActive(false);
-        ManagerGlobal.instance.playerData.SaveData();
+        ManagerGlobal.instance.mData.SaveData();
     }
 }

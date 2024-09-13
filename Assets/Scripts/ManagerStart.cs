@@ -16,7 +16,7 @@ public class ManagerStart : MonoBehaviour
     public void OpenStage(){
         _pnlSelectStage.SetActive(true);
 
-        List<bool> clearedScene = ManagerGlobal.instance.playerData.clearedStage;
+        List<bool> clearedScene = ManagerGlobal.instance.mData.clearedStage;
 
         int maxStage = -1;
         for (int i = 0; i < clearedScene.Count; i++)
@@ -37,6 +37,6 @@ public class ManagerStart : MonoBehaviour
     }
 
     public void ClearData(){
-        ManagerGlobal.instance.playerData.ClearSceneData();
+        ManagerGlobal.instance.mData.ClearSceneData();
     }
 }

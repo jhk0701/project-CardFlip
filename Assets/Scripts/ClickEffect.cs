@@ -5,7 +5,7 @@ using UnityEngine;
 public class ClickEffect : MonoBehaviour
 {
     public GameObject clickEffect;
-    Queue<GameObject> _effectPool = new Queue<GameObject>();
+    Queue<GameObject> _instEffects = new Queue<GameObject>();
 
     bool _isTesting = false;
     int _clickPerSec = 0;
@@ -15,9 +15,9 @@ public class ClickEffect : MonoBehaviour
         // click per sec : 8~8.33333
         for (int i = 0; i < 10; i++)
         {
-            GameObject particle = Instantiate(clickEffect);
+            GameObject particle = Instantiate(clickEffect, transform);
             particle.SetActive(false);
-            _effectPool.Enqueue(particle);
+            _instEffects.Enqueue(particle);
         }
     }
 
@@ -55,9 +55,9 @@ public class ClickEffect : MonoBehaviour
             pos = worldPosition;
         }
             
-        GameObject particle = _effectPool.Dequeue();
-        _effectPool.Enqueue(particle);
-        
+        GameObject particle = _instEffects.Dequeue();
+        _instEffects.Enqueue(particle);
+
         particle.SetActive(true);
         particle.transform.position = pos;
     }

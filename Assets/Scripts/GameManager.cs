@@ -27,16 +27,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _pnlGameOver;
     [SerializeField] Text _txtGameResult;
 
-  
-    [Serializable]
-    public struct StageDifficulty{
-        public int stage;
-        public float bonus;
-        public float penalty;
-    }
-
-    [Header("Difficulty")]
-    public List<StageDifficulty> stageDifficulies;
 
     private void Awake()
     {
@@ -93,12 +83,12 @@ public class GameManager : MonoBehaviour
         {
             ManagerSound.instance.StartSfx(ManagerSound.ETypeSfx.Victory, true);
 
-            ManagerGlobal.instance.playerData.UpdateSceneClear(
+            ManagerGlobal.instance.mData.UpdateSceneClear(
                 ManagerGlobal.instance.curPlayingStage,
                 true);
-            ManagerGlobal.instance.playerData.SaveData();
+            ManagerGlobal.instance.mData.SaveData();
 
-            if(ManagerGlobal.instance.curPlayingStage.Equals(ManagerGlobal.instance.playerData.sceneCount - 1))
+            if(ManagerGlobal.instance.curPlayingStage.Equals(ManagerGlobal.instance.mData.sceneCount - 1))
                 ManagerGlobal.instance.LoadScene((int)ManagerGlobal.EScene.EndingScene);
         }
     }
@@ -125,7 +115,8 @@ public class GameManager : MonoBehaviour
 
     public void AddTime(bool isBonus){
         int curStage = ManagerGlobal.instance.curPlayingStage;
-        float val = isBonus ? stageDifficulies[curStage].bonus : stageDifficulies[curStage].penalty;
+        ManagerData.StageDifficulty dif = ManagerGlobal.instance.mData.stageDifficulties[curStage];
+        float val = isBonus ? dif.bonus : dif.penalty;
         
         if(val.Equals(0f)) return;
 

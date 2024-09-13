@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerData : MonoBehaviour
+public class ManagerData : MonoBehaviour
 {
     [Header("Playing")]
     // id = stage id
@@ -15,6 +15,16 @@ public class PlayerData : MonoBehaviour
     [Header("Souond Settings")]
     public float volumeBgm;
     public float volumeSfx;
+
+    [Serializable]
+    public struct StageDifficulty{
+        public int stage;
+        public float bonus;
+        public float penalty;
+    }
+
+    [Header("Difficulty")]
+    public List<StageDifficulty> stageDifficulties;
     
     void Awake()
     {

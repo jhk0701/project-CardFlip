@@ -7,7 +7,7 @@ public class ManagerGlobal : MonoBehaviour
 {
     public static ManagerGlobal instance;
     public int curPlayingStage = 0;
-    public PlayerData playerData;
+    public ManagerData mData;
 
     public enum EScene : int{
         StartScene = 0,
