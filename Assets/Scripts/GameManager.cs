@@ -20,11 +20,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform _tfBonusTime;
     Queue<Text> _instBonusTime = new Queue<Text>(); // object poolling
     
-
-    [Header("Card")]
-    public int _cardCount = 16;
-    public Card selectedCard;
-    public Card lockedCard; // last card
+    [Header("Board")]
+    public Board board;
 
     [Header("Panel")]
     [SerializeField] GameObject _pnlGameOver;
@@ -81,64 +78,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetCardCnt(int cnt){
-        _cardCount = cnt;
-
-        if(_cardCount.Equals(0)){
-            // win
-            GameOver(true);
-        }
-        else if(_cardCount.Equals(2)){
-            lockedCard?.ReleaseLock();
-        }
-    }
-
-    void PlayEffect(Card card, string Success)
-    {
-        GameObject SuccessEffect = Instantiate(Resources.Load(Success), card.transform.position, Quaternion.identity) as GameObject;
-        Destroy(SuccessEffect, 1f);
-    }
-
-    public void SelectCard(Card c){
-        
-        if(selectedCard == null)
-        {
-            selectedCard = c;
-            ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Touch);
-
-            return;
-        }
-
-        if(c.index.Equals(selectedCard.index)){
-            // match
-            PlayEffect(selectedCard, "Success");
-            PlayEffect(c, "Success");
-            selectedCard.DestroyCard();
-            c.DestroyCard();
-
-            SetCardCnt(_cardCount - 2);
-            
-            ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Success);
-
-            // bonus
-            AddTime(stageDifficulies[ManagerGlobal.instance.curPlayingStage].bonus);
-        }
-        else{
-            // not match
-            selectedCard.anim.SetTrigger("failTrigger");
-            c.anim.SetTrigger("failTrigger");
-            
-            selectedCard.CloseCard(0.8f);
-            c.CloseCard(0.8f);
-
-            ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Fail);
-
-            //penalty
-            AddTime(stageDifficulies[ManagerGlobal.instance.curPlayingStage].penalty);
-        }
-
-        selectedCard = null;
-    }
 
     public void GameOver(bool isWin){
         ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Main);
@@ -183,7 +122,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void AddTime(float val){
+    public void AddTime(bool isBonus){
+        int curStage = ManagerGlobal.instance.curPlayingStage;
+        float val = isBonus ? stageDifficulies[curStage].bonus : stageDifficulies[curStage].penalty;
+        
         if(val.Equals(0f)) return;
 
         _time += val;
@@ -197,5 +139,4 @@ public class GameManager : MonoBehaviour
 
         t.gameObject.SetActive(true);
     }
-
 }
