@@ -6,17 +6,18 @@ using UnityEngine.UI;
 public class ManagerSound : MonoBehaviour
 {
     public static ManagerSound instance;
-    public enum TypeBgm {
+    public enum ETypeBgm {
         None, Main, Emergence
     }
-    public enum TypeSfx : int {
+    public enum ETypeSfx : int {
         Touch = 0, Success = 1, Fail = 2, Victory = 3
     }
 
 
-    TypeBgm _curBgm = TypeBgm.None;
+    ETypeBgm _curBgm = ETypeBgm.None;
     [SerializeField] AudioSource _audioSrcMain;
-    [SerializeField] List<AudioSource> _audioSrcEffects;
+    GameObject _goEffect;
+    List<AudioSource> _audioSrcEffects = new List<AudioSource>();
 
     [Header("BGM")]
     [SerializeField] AudioClip _clipMainBgm;
@@ -26,18 +27,18 @@ public class ManagerSound : MonoBehaviour
     [SerializeField] List<AudioClip> _clips;
 
     float pVolumeBgm{
-        get { return ManagerGlobal.instance.playerData.volumeBgm; }
+        get { return ManagerGlobal.instance.mData.volumeBgm; }
         set {
-            ManagerGlobal.instance.playerData.volumeBgm = value;
+            ManagerGlobal.instance.mData.volumeBgm = value;
             _audioSrcMain.volume = value;
             _txtBgm.text = (value * 100f).ToString("N0");
         }
     }
     
     float pVolumeSfx{
-        get { return ManagerGlobal.instance.playerData.volumeSfx; }
+        get { return ManagerGlobal.instance.mData.volumeSfx; }
         set {
-            ManagerGlobal.instance.playerData.volumeSfx = value;
+            ManagerGlobal.instance.mData.volumeSfx = value;
 
             for (int i = 0; i < _audioSrcEffects.Count; i++)
                 _audioSrcEffects[i].volume = value;
@@ -59,23 +60,38 @@ public class ManagerSound : MonoBehaviour
 
     void Start()
     {
-        pVolumeBgm = ManagerGlobal.instance.playerData.volumeBgm;
-        pVolumeSfx = ManagerGlobal.instance.playerData.volumeSfx;
+        if(_goEffect == null)
+        {
+            _goEffect = new GameObject("Sound Effect");
+            _goEffect.transform.SetParent(transform);
+        }
+
+        for (int i = 0; i < _clips.Count; i++)
+        {
+            AudioSource src = _goEffect.AddComponent<AudioSource>();
+
+            _audioSrcEffects.Add(src);
+            src.playOnAwake = false;
+            src.loop = false;
+        }
+
+        pVolumeBgm = ManagerGlobal.instance.mData.volumeBgm;
+        pVolumeSfx = ManagerGlobal.instance.mData.volumeSfx;
     }
 
 
-    public void StartBgm(TypeBgm bgm){
+    public void StartBgm(ETypeBgm bgm){
         if(bgm.Equals(_curBgm))
             return;
         
         _curBgm = bgm;
         _audioSrcMain.Stop();
         switch(bgm){
-            case TypeBgm.Main :
+            case ETypeBgm.Main :
             _audioSrcMain.clip = _clipMainBgm;
             break;
 
-            case TypeBgm.Emergence : 
+            case ETypeBgm.Emergence : 
             _audioSrcMain.clip = _clipEmergencyBgm;
             break;
         }
@@ -83,13 +99,11 @@ public class ManagerSound : MonoBehaviour
         _audioSrcMain.Play();
     }
 
-    public void StartSfx(TypeSfx sfx, bool isEmphasized = false){
+    public void StartSfx(ETypeSfx sfx, bool isEmphasized = false){
         
         _audioSrcEffects[(int)sfx].clip = _clips[(int)sfx];
         if(isEmphasized)
             StartCoroutine(EmphasizeSfx(_audioSrcEffects[(int)sfx]));
-
-        
 
         _audioSrcEffects[(int)sfx].Play();
     }
@@ -122,6 +136,6 @@ public class ManagerSound : MonoBehaviour
 
     public void CloseSetting(){
         _pnlSettingWindows.SetActive(false);
-        ManagerGlobal.instance.playerData.SaveData();
+        ManagerGlobal.instance.mData.SaveData();
     }
 }

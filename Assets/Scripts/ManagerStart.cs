@@ -10,13 +10,13 @@ public class ManagerStart : MonoBehaviour
 
     private void Start()
     {
-        ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Main);
+        ManagerSound.instance.StartBgm(ManagerSound.ETypeBgm.Main);
     }
 
     public void OpenStage(){
         _pnlSelectStage.SetActive(true);
 
-        List<bool> clearedScene = ManagerGlobal.instance.playerData.clearedStage;
+        List<bool> clearedScene = ManagerGlobal.instance.mData.clearedStage;
 
         int maxStage = -1;
         for (int i = 0; i < clearedScene.Count; i++)
@@ -33,10 +33,10 @@ public class ManagerStart : MonoBehaviour
     
     public void SelectStage(int id){
         ManagerGlobal.instance.curPlayingStage = id;
-        ManagerGlobal.instance.LoadScene((int)ManagerGlobal.eScene.GameScene);
+        ManagerGlobal.instance.LoadScene((int)ManagerGlobal.EScene.GameScene);
     }
 
     public void ClearData(){
-        ManagerGlobal.instance.playerData.ClearSceneData();
+        ManagerGlobal.instance.mData.ClearSceneData();
     }
 }

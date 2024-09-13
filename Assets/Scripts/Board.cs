@@ -8,13 +8,22 @@ public class Board : MonoBehaviour
     
     [SerializeField]
     private Sprite[] sprites;
+    
+    [Header("Card")]
+    public int cardCount = 16;
+    public Card selectedCard;
+    public Card lockedCard; // last card
+
 
     void Start()
     {
+        if(!GameManager.instance.board)
+            GameManager.instance.board = this;
+
         int[] arr = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
         arr = arr.OrderBy(x => UnityEngine.Random.Range(0, 7)).ToArray();
 
-        GameManager.instance.SetCardCnt(arr.Length);
+        SetCardCnt(arr.Length);
         int lastCard = -1; 
         
         if(ManagerGlobal.instance.curPlayingStage > 0)
@@ -28,6 +37,66 @@ public class Board : MonoBehaviour
 
             card.Set(arr[i], new Vector2(x, y), sprites[arr[i]], lastCard == i);
         }
+    }
+
+    
+    void SetCardCnt(int cnt){
+        cardCount = cnt;
+
+        if(cardCount.Equals(0)){
+            // win
+            GameManager.instance.GameOver(true);
+        }
+        else if(cardCount.Equals(2)){
+            lockedCard?.Unlock();
+        }
+    }
+
+    public void SelectCard(Card c){
+        
+        if(selectedCard == null)
+        {
+            selectedCard = c;
+            ManagerSound.instance.StartSfx(ManagerSound.ETypeSfx.Touch);
+
+            return;
+        }
+
+        if(c.index.Equals(selectedCard.index)){
+            // match
+            PlayEffect(selectedCard, "Success");
+            PlayEffect(c, "Success");
+            selectedCard.DestroyCard();
+            c.DestroyCard();
+
+            SetCardCnt(cardCount - 2);
+            
+            ManagerSound.instance.StartSfx(ManagerSound.ETypeSfx.Success);
+
+            // bonus
+            GameManager.instance.AddTime(true);
+        }
+        else{
+            // not match
+            selectedCard.anim.SetTrigger("failTrigger");
+            c.anim.SetTrigger("failTrigger");
+            
+            selectedCard.CloseCard(0.8f);
+            c.CloseCard(0.8f);
+
+            ManagerSound.instance.StartSfx(ManagerSound.ETypeSfx.Fail);
+
+            //penalty
+            GameManager.instance.AddTime(false);
+        }
+
+        selectedCard = null;
+    }
+
+    void PlayEffect(Card card, string Success)
+    {
+        GameObject SuccessEffect = Instantiate(Resources.Load(Success), card.transform.position, Quaternion.identity) as GameObject;
+        Destroy(SuccessEffect, 1f);
     }
 
 }

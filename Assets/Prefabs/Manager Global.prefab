@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curPlayingStage: 0
-  playerData: {fileID: 2536691749590381469}
+  mData: {fileID: 2536691749590381469}
 --- !u!114 &2536691749590381469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,6 +105,13 @@ MonoBehaviour:
   clearedStage: 
   volumeBgm: 0
   volumeSfx: 0
+  stageDifficulties:
+  - stage: 0
+    bonus: 1
+    penalty: 0
+  - stage: 1
+    bonus: 1.5
+    penalty: -1
 --- !u!114 &8803266306812960204
 MonoBehaviour:
   m_ObjectHideFlags: 0

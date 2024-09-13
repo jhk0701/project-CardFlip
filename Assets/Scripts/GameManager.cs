@@ -20,25 +20,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform _tfBonusTime;
     Queue<Text> _instBonusTime = new Queue<Text>(); // object poolling
     
-
-    [Header("Card")]
-    public int _cardCount = 16;
-    public Card selectedCard;
-    public Card lockedCard; // last card
+    [Header("Board")]
+    public Board board;
 
     [Header("Panel")]
     [SerializeField] GameObject _pnlGameOver;
     [SerializeField] Text _txtGameResult;
 
-  
-    [Serializable]
-    public struct StageDifficulty{
-        public int stage;
-        public float bonus;
-        public float penalty;
-    }
-    [Header("Difficulty")]
-    public List<StageDifficulty> stageDifficulies;
 
     private void Awake()
     {
@@ -68,7 +56,7 @@ public class GameManager : MonoBehaviour
         if (_time <= 10f && !RedBackground.activeInHierarchy)
         {
             RedBackground.SetActive(true);
-            ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Emergence);
+            ManagerSound.instance.StartBgm(ManagerSound.ETypeBgm.Emergence);
         }
         else if (_time <= 0f)
         {
@@ -81,67 +69,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetCardCnt(int cnt){
-        _cardCount = cnt;
-
-        if(_cardCount.Equals(0)){
-            // win
-            GameOver(true);
-        }
-        else if(_cardCount.Equals(2)){
-            lockedCard?.ReleaseLock();
-        }
-    }
-
-    void PlayEffect(Card card, string Success)
-    {
-        GameObject SuccessEffect = Instantiate(Resources.Load(Success), card.transform.position, Quaternion.identity) as GameObject;
-        Destroy(SuccessEffect, 1f);
-    }
-
-    public void SelectCard(Card c){
-        
-        if(selectedCard == null)
-        {
-            selectedCard = c;
-            ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Touch);
-
-            return;
-        }
-
-        if(c.index.Equals(selectedCard.index)){
-            // match
-            PlayEffect(selectedCard, "Success");
-            PlayEffect(c, "Success");
-            selectedCard.DestroyCard();
-            c.DestroyCard();
-
-            SetCardCnt(_cardCount - 2);
-            
-            ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Success);
-
-            // bonus
-            AddTime(stageDifficulies[ManagerGlobal.instance.curPlayingStage].bonus);
-        }
-        else{
-            // not match
-            selectedCard.anim.SetTrigger("failTrigger");
-            c.anim.SetTrigger("failTrigger");
-            
-            selectedCard.CloseCard(0.8f);
-            c.CloseCard(0.8f);
-
-            ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Fail);
-
-            //penalty
-            AddTime(stageDifficulies[ManagerGlobal.instance.curPlayingStage].penalty);
-        }
-
-        selectedCard = null;
-    }
 
     public void GameOver(bool isWin){
-        ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Main);
+        ManagerSound.instance.StartBgm(ManagerSound.ETypeBgm.Main);
 
         RedBackground.SetActive(false);
         _isPlaying = false;
@@ -151,25 +81,25 @@ public class GameManager : MonoBehaviour
         
         if(isWin)
         {
-            ManagerSound.instance.StartSfx(ManagerSound.TypeSfx.Victory, true);
+            ManagerSound.instance.StartSfx(ManagerSound.ETypeSfx.Victory, true);
 
-            ManagerGlobal.instance.playerData.UpdateSceneClear(
+            ManagerGlobal.instance.mData.UpdateSceneClear(
                 ManagerGlobal.instance.curPlayingStage,
                 true);
-            ManagerGlobal.instance.playerData.SaveData();
+            ManagerGlobal.instance.mData.SaveData();
 
-            if(ManagerGlobal.instance.curPlayingStage.Equals(ManagerGlobal.instance.playerData.sceneCount - 1))
-                ManagerGlobal.instance.LoadScene((int)ManagerGlobal.eScene.EndingScene);
+            if(ManagerGlobal.instance.curPlayingStage.Equals(ManagerGlobal.instance.mData.sceneCount - 1))
+                ManagerGlobal.instance.LoadScene((int)ManagerGlobal.EScene.EndingScene);
         }
     }
 
     public void Retry(){
-        ManagerGlobal.instance.LoadScene((int)ManagerGlobal.eScene.GameScene);
-        ManagerSound.instance.StartBgm(ManagerSound.TypeBgm.Main);
+        ManagerGlobal.instance.LoadScene((int)ManagerGlobal.EScene.GameScene);
+        ManagerSound.instance.StartBgm(ManagerSound.ETypeBgm.Main);
     }
 
     public void Exit(){
-        ManagerGlobal.instance.LoadScene((int)ManagerGlobal.eScene.StartScene);
+        ManagerGlobal.instance.LoadScene((int)ManagerGlobal.EScene.StartScene);
     }
 
     
@@ -183,7 +113,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void AddTime(float val){
+    public void AddTime(bool isBonus){
+        int curStage = ManagerGlobal.instance.curPlayingStage;
+        ManagerData.StageDifficulty dif = ManagerGlobal.instance.mData.stageDifficulties[curStage];
+        float val = isBonus ? dif.bonus : dif.penalty;
+        
         if(val.Equals(0f)) return;
 
         _time += val;
@@ -197,5 +131,4 @@ public class GameManager : MonoBehaviour
 
         t.gameObject.SetActive(true);
     }
-
 }

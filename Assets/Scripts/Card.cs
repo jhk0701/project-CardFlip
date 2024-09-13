@@ -46,22 +46,22 @@ public class Card : MonoBehaviour
     {
         this.index = index;
         getTransform.position = position;
-        SpriteRenderer spriteRenderer = front.GetComponent<SpriteRenderer>();        
+        SpriteRenderer spriteRenderer = front.GetComponent<SpriteRenderer>();   
+
         if(spriteRenderer != null)
             spriteRenderer.sprite = sprite;
 
         isLast = lastCard;
 
-        if(isLast)
-        {
+        if(isLast) {
             _lock.SetActive(isLast);
-            GameManager.instance.lockedCard = this;
+            GameManager.instance.board.lockedCard = this;
         }
     }
 
     public void OpenCard()
     {
-        if(isLast == true && GameManager.instance._cardCount != 2)
+        if(isLast == true && GameManager.instance.board.cardCount != 2)
         {
             Debug.Log("접근 불가");
             return;
@@ -70,7 +70,7 @@ public class Card : MonoBehaviour
         anim.SetBool("isOpen", true);
         front.SetActive(true);
         back.SetActive(false);
-        GameManager.instance.SelectCard(this);
+        GameManager.instance.board.SelectCard(this);
     }
 
     public void DestroyCard()
@@ -100,7 +100,7 @@ public class Card : MonoBehaviour
         back.SetActive(true);
     }
 
-    public void ReleaseLock(){
+    public void Unlock(){
         _lock.SetActive(false);
     }
 
