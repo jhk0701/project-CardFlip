@@ -73,22 +73,25 @@
       IDE를 열어서 충돌난 지점들을 확인하고 두 작업들을 합쳐주었습니다.<br/>
     </li>
     <li>
-      <h4>프리팹 오류</h4>
+      <h4>프리팹 삭제 오류</h4>
       <b>원인 : </b><br/>
-      스크립트와 비슷하게 하나의 프리팹에 대해 2명의 작업자가 수정한 경우였습니다.<br/>
-      이때 한 작업자 분은 Board 프리팹의 이름을 Card로 변경했습니다.<br/>
-      간단한 수정이지만 merge 이후에 작업을 진행할 때 문제가 되었습니다.<br/><br/>
-      Board를 계속해서 쓰고 계신 작업자분께서 프리팹이 사라졌다고 말하셨습니다.<br/>
+      프리팹의 경우 Board 프리팹이 merge 후에 지속적으로 삭제되는 사항이 있었습니다.<br/>
+      혹시 작업 중에 삭제하거나 수정하지 않았는지 물었지만 삭제하는 변경은 없다고 했습니다.<br/>
       급하게 이상이 없는지 확인을 해보지만 merge가 충돌 없이 잘 합쳐져서 이상이 없다고 표시되었습니다.<br/>
+      <br/><img src="https://github.com/user-attachments/assets/d59b4991-e57f-4043-9999-2ed66dcba8e2" width=900px></img><br/><br/>
       히스토리를 뒤져보고서야 이름이 바뀐 걸 알 수 있었습니다.<br/><br/>
+      Board 프리팹에 대해 2명의 작업자가 수정 작업을 했고, 이 중 한명이 Board 프리팹의 이름을 Card로 변경한 것입니다.<br/>
+      결과적으로 rename 변경이기에 오류가 없던 것이고, 이름이 바뀌면서 다른 오브젝트로 인식되었기에 프리팹이 사라진 걸로 보였던 겁니다.<br/>
+      <br/><img src="https://github.com/user-attachments/assets/7d76b214-6a7c-4bdf-9145-0c616a5f0d23" width=900px>merge 이후에도 계속해서 rename이 반영됨.</img><br/><br/>
       <b>해결 : </b><br/>
+      <br/><img src="https://github.com/user-attachments/assets/90702f5d-972e-4e2f-ac50-124d4608d959" width=900px></img><br/><br/>
       해결법으로는 Board 프리팹을 별도의 패키지로 export해서 백업했습니다.<br/>
       그리고 merge가 끝난 브랜치에서 이 패키지를 import해서 합치는 것으로 해결했습니다.<br/>
     </li>
     <li>
       <h4>씬 충돌</h4>
       <b>원인 : </b><br/>
-      여럿이서 하나의 씬을 작업하면 씬에서도 충돌이 일어날 수 있습니다.<br/>
+      여럿이서 하나의 씬을 작업하면 씬에도 충돌이 일어날 수 있습니다.<br/>
       한분은 씬에 기능을 추가하기 위해 오브젝트를 배치하고 스크립트를 할당하는 작업을 하셨고,<br/>
       다른 한분은 UI를 수정하는 작업을 하신 경우에 씬 충돌이 발생했습니다.<br/><br/>
       튜터님의 조언대로 바톤 터치하듯 작업을 이어나갔다면 좋았겠지만<br/>
@@ -97,9 +100,12 @@
       이 부분은 명확한 해결책은 없고 주먹구구 식으로 해결했습니다.<br/>
       우선 깃허브 merge를 누르면 충돌이 나는 파일들을 알 수 있습니다.<br/>
       그 중에서 씬 파일이 보이면 merge를 중단합니다.<br/><br/>
+      <br/><img src="https://github.com/user-attachments/assets/8f55813f-350a-4265-b11e-46685b63e7c4" width=600px></img><br/><br/>
       그리고 back-up 폴더를 만들어 충돌 난 씬을 복사해서 넣어둡니다.<br/>
+      <br/><img src="https://github.com/user-attachments/assets/d5b41e67-3d78-4475-afbc-a3d458223449" width=600px></img><br/><br/>
       다시 merge를 진행하면 back-up 폴더는 추가의 형태로 merge 되기에 보존할 수 있습니다.<br/>
       그리고 여전히 충돌이 나는 씬은 merge해올 브랜치의 씬으로 덮어씌워 줍니다.<br/><br/>
+      <br/><img src="https://github.com/user-attachments/assets/b06d5075-29fb-473b-b3d0-434278818250" width=600px></img><br/><br/>
       그 후에 작업자들과 화면 공유하며 back-up 폴더의 씬들과 차이를 비교하며 수동으로 합쳐주는 방법으로 해결했습니다.<br/>
     </li>
   </ul>
